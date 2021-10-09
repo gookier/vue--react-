@@ -11,60 +11,34 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+###思考：
+1：双向绑定思维需要变更，在vue中，我们习惯将表单作为一个子组件，然后通过子组件$emit方法来触发父组件的状态更新.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2：按钮点击事件的绑定，采用onClick方式，同时注意{}的使用
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3：class组件和function组件的差别，使用了class组件，时时刻刻都得注意this的指向问题，使用function组件，没有state状态管理，需要引入useState。
 
-### `npm run eject`
+4：父子组件调用，注意版本，一开始使用refs，后面推荐useRef，再到后来使用forwardRef，跟着提示一步步深入。
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+5：生命周期：useEffect真是个好东西，//return参数为组件将死。
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+6：设置代理的使用，vue中在vue.config中配置，而且代理地址可以设置为/. react不可以
+vue   :proxyTable: {
+        '/': {
+        target: 'http://192.168.2.6:8088', 
+        changeOrigin: true,  // 设置这个参数可以避免跨域
+        pathRewrite: {
+          "/": ""
+        }
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+react   app.use(createProxyMiddleware('/LC', {
+        target : 'http://192.168.2.222:5000',
+        changeOrigin : true,
+        pathRewrite : {
+            '^/LC' : '/'
+        },
+    }));
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
